@@ -1,15 +1,13 @@
 <h1>Feed</h1>
+<div class="row">
 <ul>
     <li *ngFor="#obj of data">
-        {{obj.content}}
+        <div class="row">
+            <div class="col-xs-6">
+                {{obj.twitterItem}}
+            </div>
+            <div class="col-xs-6">{{obj.flickrItem}}</div>
+        </div>
     </li>
 </ul>
-
-<div class="row">
-    <div class="col-xs-6">
-        Col Left
-    </div>
-    <div class="col-xs-6">
-        Col Right
-    </div>
 </div>

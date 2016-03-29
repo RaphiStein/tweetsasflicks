@@ -4,7 +4,9 @@ export class TwitterService {
     getTweets(): {}[] {
         this.tweets = [
             {
-                text: "I love #Montreal", entities: {
+                user: "Adam",
+                text: "I love #Montreal", 
+                entities: {
                     hashtags: [
                         {
                             text: 'Montreal'
@@ -12,7 +14,9 @@ export class TwitterService {
                 }
             },
             {
-                text: "I love #Toronto", entities: {
+                user: "Eve",
+                text: "I love #Toronto", 
+                entities: {
                     hashtags: [
                         {
                             text: 'Toronto'
