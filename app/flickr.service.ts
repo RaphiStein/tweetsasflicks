@@ -1,5 +1,6 @@
 import {Injectable} from 'angular2/core';
 import {Http, HTTP_PROVIDERS} from 'angular2/http';
+import 'rxjs/Rx';
 
 @Injectable()
 export class FlickrService {
@@ -31,14 +32,7 @@ export class FlickrService {
         // Get Images for tag
         // Construct url 
         var imagesurl = flickrAPI.fetchImagesByTag + hashtag[0];
-        this.httpService.get(imagesurl)
-            .subscribe(function(res) {
-                this.httpService.get('http://jsonplaceholder.typicode.com/posts')
-                    .subscribe(function(res) {
-                        this.flickrData = res;
-                    });
-            });
+        return this.httpService.get(imagesurl).map(res => res.json());
         
-        return this.flickrData;
     }
 }

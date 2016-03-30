@@ -1,30 +1,19 @@
-export class TwitterService {
+import {Injectable} from 'angular2/core';
+import {Http, Response, HTTP_PROVIDERS} from 'angular2/http';
+import 'rxjs/Rx';
+
+@Injectable()
+export class TwitterService{
     tweets: {}[];
 
-    getTweets(): {}[] {
-        this.tweets = [
-            {
-                user: "Adam",
-                text: "I love #Montreal", 
-                entities: {
-                    hashtags: [
-                        {
-                            text: 'Montreal'
-                        }]
-                }
-            },
-            {
-                user: "Eve",
-                text: "I love #Toronto", 
-                entities: {
-                    hashtags: [
-                        {
-                            text: 'Toronto'
-                        }]
-                }
-            },
-        ];
-
-        return this.tweets;
+    constructor(private http:Http) {
     }
+        
+    getTweets(){
+        console.log(this.http);
+        return this.http.get('./app/sample-tweets.json')
+        .map(res => res.json());
+    }
+    
+    
 }
