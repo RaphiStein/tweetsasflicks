@@ -9,7 +9,7 @@ export class FlickrService {
     flickrData;
 
     flickrAPI = {
-        fetchImagesByTag: 'https://api.flickr.com/services/rest/?&method=flickr.photos.search&api_key=112520de0d09437b543a5c72224cd680&per_page=1&sort=relevance&format=json&nojsoncallback=?&tags=',
+        fetchImagesByTag: 'https://api.flickr.com/services/rest/?&method=flickr.photos.search&api_key=112520de0d09437b543a5c72224cd680&per_page=1&sort=relevance&format=json&nojsoncallback=?&text=',
         //e.g. https://farm2.staticflickr.com/1545/25467059514_e7f5a34a3d_n.jpg
         fetchImageById: {
             part1: "https://farm",
@@ -33,7 +33,7 @@ export class FlickrService {
         // Get Images for tag
         // Construct url 
         var imagesurl = this.flickrAPI.fetchImagesByTag + hashtag;
-
+        console.log("Fetching from " + imagesurl);
 
         return Observable.create((o) => {
             var thisO = o;

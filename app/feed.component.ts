@@ -34,46 +34,6 @@ export class FeedComponent {
                 }
             }
         });
- 
-        /*
-        var messages: FeedItem[] = [
-            new FeedItem(new TwitterData("joe", "tweet1"), new FlickrData("Joe", "img1")),
-            new FeedItem(new TwitterData("joe", "tweet2"), new FlickrData("Joe", "img2")),
-        ];
-
-        this.feedItems$ = Observable.interval(2000)
-            .map(i => messages)
-            .take(1);
-
-        this.tweets$ = this.twitterService.getTweets();
-
-
-        //this.assembleFeed("Montreal");
-        
-        /*
-        var data = twitterService.getTweets();
-        // Create TwitterData from Tweets
-        for (var tweet in data){
-            console.log("Tweet");
-            //console.log(data[tweet]);
-            var flickerItem : FlickrData = new FlickrData("hashtag");
-            var twitterItem : TwitterData = new TwitterData(data[tweet]["user"], data[tweet]["text"]);
-            
-            console.log(twitterItem);
-            var feedItem: FeedItem = new FeedItem(twitterItem, flickerItem);
-            this.data.push(feedItem);
-        }
-        
-        // Get Flickr Data for each Tweet
-        
-        console.log(this.data);
-        
-        var self = this;
-        setTimeout(function() {
-            console.log(self.data);
-            self.data[0].twitterItem.content = "Changed!!";
-        }, 3000);
-        */
         
         
     }
