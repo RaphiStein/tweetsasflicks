@@ -1,0 +1,30 @@
+[
+    {
+        "user": "Adam",
+        "text": "I love #NewYork #USA",
+        "entities": {
+            "hashtags": [
+                {
+                    "text": "NewYork"
+                },
+                {
+                    "text": "USA"
+                }
+            ]
+        }
+    },
+    {
+        "user": "Eve",
+        "text": "I love #LosAngeles #USA",
+        "entities": {
+            "hashtags": [
+                {
+                    "text": "LosAngeles"
+                },
+                {
+                    "text": "USA"
+                }
+            ]
+        }
+    }
+]

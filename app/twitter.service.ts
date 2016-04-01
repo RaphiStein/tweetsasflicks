@@ -3,18 +3,21 @@ import {Http, Response, HTTP_PROVIDERS} from 'angular2/http';
 import 'rxjs/Rx';
 
 @Injectable()
-export class TwitterService{
+export class TwitterService {
     tweets: {}[];
 
-    constructor(private http:Http) {
+    constructor(private http: Http) {
     }
-        
-    getTweets(){
-        
-        console.log(this.http);
-        return this.http.get('./app/sample-tweets.json')
-        .map(res => res.json());
+
+    getTweets(hashtag: string) {
+        var url = "";
+        if (hashtag == 'A') {
+            url = './app/sample-tweetsA.json';
+        }
+        else if (hashtag == 'B') {
+            url = './app/sample-tweetsB.json';
+        }
+        return this.http.get(url)
+            .map(res => res.json());
     }
-    
-    
 }
