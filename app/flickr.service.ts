@@ -1,5 +1,6 @@
 import {Injectable} from 'angular2/core';
 import {Http, HTTP_PROVIDERS} from 'angular2/http';
+import {Observable} from 'rxjs/Rx';
 import 'rxjs/Rx';
 
 @Injectable()
@@ -29,12 +30,26 @@ export class FlickrService {
      */
     getImages(hashtag: string) {
         
-        
         // Get Images for tag
         // Construct url 
-        var imagesurl = this.flickrAPI.fetchImagesByTag + hashtag[0];
-        return this.httpService.get(imagesurl).map(res => res.json());
-        // TODO combine observables and return as 1
+        var imagesurl = this.flickrAPI.fetchImagesByTag + hashtag;
+
+
+        return Observable.create((o) => {
+            var thisO = o;
+            this.httpService.get(imagesurl)
+            .map(res => {
+                console.log("res");
+                console.log(res.json());
+                return res.json();
+            })
+            .map(res => res.photos.photo[0])
+            .subscribe((result) => {
+                console.log(result);
+                console.log(this.generateImageUrl(result));
+                thisO.next(this.generateImageUrl(result));
+            });
+        });
     }
 
     generateImageUrl(imgData) {
@@ -42,6 +57,7 @@ export class FlickrService {
     }
 
     getImagesMock(hashtag: string) {
+        /*
         console.log(hashtag)
         var url; 
         
@@ -51,14 +67,13 @@ export class FlickrService {
         else {
             url = './app/sample-flicks-imgsB.json'
         }
-        return this.http.get(url)
-            .map(res => res.json());
-        /*
+        */
+        return this.http.get("")
+            .map(res => res.json())
             .map(res => {
                 res = res.json().photos;
                 console.log(res);
                 return res;
-                );
-                */
+            });
     }
 }

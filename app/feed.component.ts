@@ -23,14 +23,13 @@ export class FeedComponent {
         this.flickrService = flickrService;
 
 
-
         var tweets$ = this.twitterService.getTweets();
 
         tweets$.subscribe((tweets) => {
             for (var i in tweets) {
                 var hashtags = tweets[i].entities.hashtags;
                 for (var j in hashtags) {
-                    var flicks$ = this.flickrService.getImagesMock(hashtags[j].text);
+                    var flicks$ = this.flickrService.getImages(hashtags[j].text);
                     this.subscribeToFlicks(flicks$, tweets[i]);
                 }
             }
@@ -81,15 +80,15 @@ export class FeedComponent {
     
     subscribeToFlicks(flicks$, tweet) {
             flicks$.subscribe((results) => {
+                console.log("Flickr Subscription:");
+                console.log(results);
+                
                 var twitterItem = new TwitterData(tweet.user, tweet.text);
-                var flickrItem = new FlickrData("joe", results[0]);
+                var flickrItem = new FlickrData("null", results);
                 
                 var feedItem = new FeedItem(twitterItem, flickrItem);
                 
                 this.feedItems.push(feedItem);
-                
-                
-                
                 console.log(tweet);
                 console.log(results);
             });

@@ -8,6 +8,7 @@
     <div id="feed" class="col-xs-12">
         <div *ngFor="#feedItem of feedItems" class="row feed-row">
                 <div class="col-xs-6 feed-tweet">
+                    {{feedItem.twitterItem.user}}
                     {{feedItem.twitterItem.content}}
                 </div>
                 <div class="col-xs-6 feed-flick">
