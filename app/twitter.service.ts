@@ -10,6 +10,7 @@ export class TwitterService{
     }
         
     getTweets(){
+        
         console.log(this.http);
         return this.http.get('./app/sample-tweets.json')
         .map(res => res.json());

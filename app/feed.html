@@ -1,12 +1,18 @@
 <div class="row">
+    <div *ngFor="#tweet of testing$" class="row feed-row">
+        <p>{{tweet}}</p>
+    </div>    
+</div>
+
+<div class="row">
     <div id="feed" class="col-xs-12">
-        <div *ngFor="#obj of data" class="row feed-row">
+        <div *ngFor="#feedItem of feedItems" class="row feed-row">
                 <div class="col-xs-6 feed-tweet">
-                    {{obj.twitterItem.content}}
+                    {{feedItem.twitterItem.content}}
                 </div>
                 <div class="col-xs-6 feed-flick">
-                    <img src="{{obj.flickrItem.imgUrl}}" alt="">
+                    <img src="{{feedItem.flickrItem.imgUrl}}" alt="">
                 </div>
         </div>
     </div>
-</div>
+</div>  
