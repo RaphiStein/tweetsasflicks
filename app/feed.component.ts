@@ -52,14 +52,34 @@ export class FeedComponent {
         var self = this;
         this.twitterService.getTweets().subscribe(function(tweets) {
             for (var i in tweets) {
+                var feedItem : FeedItem = new FeedItem(null, null);
                 var twitterItem: TwitterData = new TwitterData(tweets[i]["user"], tweets[i]["text"]);
+                feedItem.setTwitterItem(twitterItem);
+                
                 var hashtags = [];
                 for (var j in tweets[i]["entities"]["hashtags"]) {
                     hashtags.push(tweets[i]["entities"]["hashtags"][j]["text"]);
                 }
-                self.flickrService.getImages(hashtags)
+                
+                self.flickrService.getImages(["montreal"])
                 .subscribe(function(flicks) {
                     console.log(flicks);
+                    var flickrImageData = {
+                        farm: "",
+                        server: "",
+                        id: "",
+                        secret: ""
+                    };
+                    flickrImageData.farm = flicks["photos"]["photo"][0]["farm"];
+                    flickrImageData.server = flicks["photos"]["photo"][0]["server"];
+                    flickrImageData.id = flicks["photos"]["photo"][0]["id"];
+                    flickrImageData.secret = flicks["photos"]["photo"][0]["secret"];
+                    
+                    var imgUrl = self.flickrService.generateImageUrl(flickrImageData);
+                    var flickItem :FlickrData = new FlickrData(null, imgUrl);
+                    
+                    feedItem.setFlickrItem(flickItem);
+                    self.data.push(feedItem); 
                 });
             }
 
@@ -85,14 +105,25 @@ class TwitterData {
 }
 class FlickrData {
     user: string;
-    img: string;
+    imgUrl: string;
+    
+    constructor(user: string, img: string) {
+        this.user = user;
+        this.imgUrl = img;
+    }
 }
 class FeedItem {
     twitterItem: TwitterData;
     flickrItem: FlickrData;
 
-    constructor(twitItem: TwitterData, flickItem: FlickrData) {
+    constructor(twitItem?: TwitterData, flickItem?: FlickrData) {
         this.twitterItem = twitItem;
+        this.flickrItem = flickItem;
+    }
+    setTwitterItem(twitItem: TwitterData){
+        this.twitterItem = twitItem;
+    }
+    setFlickrItem(flickItem: FlickrData){
         this.flickrItem = flickItem;
     }
 }
