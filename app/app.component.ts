@@ -3,7 +3,7 @@ import {FeedComponent} from './feed.component';
 
 @Component({
     selector: 'my-app',
-    template: '<h1>My First Angular 2 App </h1> <feed></feed>',
+    templateUrl: './app/app.html',
     directives: [FeedComponent]
 })
 export class AppComponent { }

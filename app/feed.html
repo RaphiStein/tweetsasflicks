@@ -1,16 +1,13 @@
-<h1>Feed</h1>
 <div class="row">
-<ul>
-    <li *ngFor="#obj of data">
-        <div class="row">
-            <div class="col-xs-6">
-                {{obj.twitterItem.content}}
-            </div>
-            <div class="col-xs-6">
-                {{obj.flickrItem.imgUrl}}
-                <img src="{{obj.flickrItem.imgUrl}}" alt="">
+    <div id="feed" class="col-xs-12">
+        <div *ngFor="#obj of data" class="row feed-row">
+                <div class="col-xs-6">
+                    {{obj.twitterItem.content}}
+                </div>
+                <div class="col-xs-6">
+                    {{obj.flickrItem.imgUrl}}
+                    <img src="{{obj.flickrItem.imgUrl}}" alt="">
                 </div>
         </div>
-    </li>
-</ul>
+    </div>
 </div>
