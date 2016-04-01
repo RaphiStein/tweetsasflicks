@@ -1,5 +1,17 @@
 .feed-row {
     padding: 14px 20px;
     border: 1px solid black;
-    margin: 5px 10px;   
+    margin: 5px 10px;
+    height: 200px;
+}
+
+.feed-tweet {
+    border-right: 1px gray solid;
+    height: 100%;
+}
+.feed-flick: {
+    height: 100%;    
+}
+.feed-flick img {
+    max-height: 180px;
 }
