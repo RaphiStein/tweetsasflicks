@@ -20,9 +20,13 @@ export class FeedComponent {
     constructor(twitterService: TwitterService, flickrService: FlickrService) {
         this.twitterService = twitterService;
         this.flickrService = flickrService;
+        
+        this.hashtagInput = "Canada";
+        this.onSubmit();
     }
 
     subscribeToFlicks(flicks$, tweet) {
+        console.log("Here");
         flicks$.subscribe((results) => {
             console.log("Flickr Subscription:");
             console.log(results);
@@ -46,10 +50,8 @@ export class FeedComponent {
         tweets$.subscribe((tweets) => {
             for (var i in tweets) {
                 var hashtags = tweets[i].entities.hashtags;
-                for (var j in hashtags) {
-                    var flicks$ = this.flickrService.getImages(hashtags[j].text);
+                    var flicks$ = this.flickrService.getImages(hashtags);
                     this.subscribeToFlicks(flicks$, tweets[i]);
-                }
             }
         });
     }

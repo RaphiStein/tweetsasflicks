@@ -28,30 +28,37 @@ export class FlickrService {
      * Gets Flickr images for a hashtag and returns urls for these images
      * @returns urls for use in img tags
      */
-    getImages(hashtag: string) {
+    getImage(imageUrl: string) {
         
-        // Get Images for tag
-        // Construct url 
-        var imagesurl = this.flickrAPI.fetchImagesByTag + hashtag;
-        console.log("Fetching from " + imagesurl);
+        console.log("Fetching from " + imageUrl);
 
         return Observable.create((o) => {
-            var thisO = o;
-            this.httpService.get(imagesurl)
+            this.httpService.get(imageUrl)
             .map(res => {
-                console.log("res");
-                console.log(res.json());
                 return res.json();
             })
             .map(res => res.photos.photo[0])
             .subscribe((result) => {
-                console.log(result);
                 console.log(this.generateImageUrl(result));
-                thisO.next(this.generateImageUrl(result));
+                o.next(this.generateImageUrl(result));
             });
         });
     }
-
+    
+    getImages(hashtags:string[]){
+        var arrayOfObservables = [];
+        for (var hashtag in hashtags){
+            var url = this.flickrAPI.fetchImagesByTag + hashtags[hashtag];
+            var query = this.getImage(url);
+            arrayOfObservables.push(query);
+        }
+        console.log(arrayOfObservables);
+        return Observable.forkJoin(arrayOfObservables, function(){
+            console.log("Fork Join Done");
+            return "from Fork Join with love";
+        });
+    }
+    
     generateImageUrl(imgData) {
         return this.flickrAPI.fetchImageById.part1 + imgData.farm + this.flickrAPI.fetchImageById.part2 + imgData.server + this.flickrAPI.fetchImageById.part3 + imgData.id + this.flickrAPI.fetchImageById.part4 + imgData.secret + this.flickrAPI.fetchImageById.part5;
     }
