@@ -11,10 +11,10 @@ export class TwitterService {
 
     getTweets(hashtag: string) {
         var url = "";
-        if (hashtag == 'A') {
+        if (hashtag == 'Canada') {
             url = './app/sample-tweetsA.json';
         }
-        else if (hashtag == 'B') {
+        else if (hashtag == 'USA') {
             url = './app/sample-tweetsB.json';
         }
         return this.http.get(url)
