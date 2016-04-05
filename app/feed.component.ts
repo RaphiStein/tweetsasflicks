@@ -20,11 +20,28 @@ export class FeedComponent {
     constructor(twitterService: TwitterService, flickrService: FlickrService) {
         this.twitterService = twitterService;
         this.flickrService = flickrService;
-        
+
         this.hashtagInput = "Canada";
         this.onSubmit();
     }
 
+
+    onSubmit() {
+        // First, clear FeedItems
+        this.feedItems = [];
+
+        var tweets$ = this.twitterService.getTweets(this.hashtagInput);
+
+        tweets$.subscribe((tweets) => {
+            for (var i in tweets) {
+                var hashtags = tweets[i].entities.hashtags;
+                var flicks$ = this.flickrService.getImages(hashtags);
+                this.subscribeToFlicks(flicks$, tweets[i]);
+            }
+        });
+    }
+    
+    
     subscribeToFlicks(flicks$, tweet) {
         console.log("Here");
         flicks$.subscribe((results) => {
@@ -40,21 +57,7 @@ export class FeedComponent {
         });
     }
 
-    onSubmit() {
-        // First, clear FeedItems
-        this.feedItems = [];
-        
-        
-        var tweets$ = this.twitterService.getTweets(this.hashtagInput);
-
-        tweets$.subscribe((tweets) => {
-            for (var i in tweets) {
-                var hashtags = tweets[i].entities.hashtags;
-                    var flicks$ = this.flickrService.getImages(hashtags);
-                    this.subscribeToFlicks(flicks$, tweets[i]);
-            }
-        });
-    }
+    
 }
 
 
@@ -69,11 +72,12 @@ class TwitterData {
 }
 class FlickrData {
     user: string;
-    imgUrl: string;
+    imgUrls: string[];
+    //imgUrl: string;
 
-    constructor(user: string, img: string) {
+    constructor(user: string, img: string[]) {
         this.user = user;
-        this.imgUrl = img;
+        this.imgUrls = img;
     }
 }
 class FeedItem {

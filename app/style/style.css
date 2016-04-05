@@ -12,6 +12,9 @@
 .feed-flick: {
     height: 100%;    
 }
+.feed-flick .flick {
+    float: left;
+}
 .feed-flick img {
     max-height: 180px;
 }

@@ -20,3 +20,9 @@ with excellent support for Angular apps that use routing.
 * `npm run typings` - runs the typings tool.
 * `npm run postinstall` - called by *npm* automatically *after* it successfully completes package installation. This script installs the TypeScript definition files this app requires.
 "# tweetsasflicks" 
+
+
+## TEAM
+Alex Michael Perkins
+Jayanti Rani
+Raphael Stein

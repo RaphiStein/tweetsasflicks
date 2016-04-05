@@ -31,32 +31,27 @@ export class FlickrService {
     getImage(imageUrl: string) {
         
         console.log("Fetching from " + imageUrl);
-
-        return Observable.create((o) => {
-            this.httpService.get(imageUrl)
+        
+        return this.httpService.get(imageUrl)
             .map(res => {
                 return res.json();
             })
             .map(res => res.photos.photo[0])
-            .subscribe((result) => {
-                console.log(this.generateImageUrl(result));
-                o.next(this.generateImageUrl(result));
-            });
-        });
+            .map(res => this.generateImageUrl(res));
     }
     
     getImages(hashtags:string[]){
+        console.log("getImages()");
         var arrayOfObservables = [];
         for (var hashtag in hashtags){
-            var url = this.flickrAPI.fetchImagesByTag + hashtags[hashtag];
+            console.log(this.flickrAPI.fetchImagesByTag);
+            console.log(hashtags[hashtag]);
+            var url:string = this.flickrAPI.fetchImagesByTag + "" + hashtags[hashtag].text;
             var query = this.getImage(url);
             arrayOfObservables.push(query);
         }
         console.log(arrayOfObservables);
-        return Observable.forkJoin(arrayOfObservables, function(){
-            console.log("Fork Join Done");
-            return "from Fork Join with love";
-        });
+        return Observable.forkJoin(arrayOfObservables);
     }
     
     generateImageUrl(imgData) {
