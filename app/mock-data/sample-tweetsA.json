@@ -1,0 +1,36 @@
+[
+    {
+        "user": "Adam",
+        "text": "I love #Montreal #Canada #Earth #Universe",
+        "entities": {
+            "hashtags": [
+                {
+                    "text": "Montreal"
+                },
+                {
+                    "text": "Canada"
+                },
+                {
+                    "text": "Earth"
+                },
+                {
+                    "text": "Universe"
+                }
+            ]
+        }
+    },
+    {
+        "user": "Eve",
+        "text": "I love #Toronto #Canada",
+        "entities": {
+            "hashtags": [
+                {
+                    "text": "Toronto"
+                },
+                {
+                    "text": "Canada"
+                }
+            ]
+        }
+    }
+]

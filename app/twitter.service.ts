@@ -12,10 +12,10 @@ export class TwitterService {
     getTweets(hashtag: string) {
         var url = "";
         if (hashtag == 'Canada') {
-            url = './app/sample-tweetsA.json';
+            url = './app/mock-data/sample-tweetsA.json';
         }
         else if (hashtag == 'USA') {
-            url = './app/sample-tweetsB.json';
+            url = './app/mock-data/sample-tweetsB.json';
         }
         return this.http.get(url)
             .map(res => res.json());

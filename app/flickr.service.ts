@@ -64,10 +64,10 @@ export class FlickrService {
         var url; 
         
         if (hashtag == 'Montreal'){
-            url = './app/sample-flicks-imgsA.json'
+            url = './app/mock-data/sample-flicks-imgsA.json'
         }
         else {
-            url = './app/sample-flicks-imgsB.json'
+            url = './app/mock-data/sample-flicks-imgsB.json'
         }
         */
         return this.http.get("")
