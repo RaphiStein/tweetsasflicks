@@ -1,0 +1,14 @@
+{
+  "name": "soen487projectproxy",
+  "version": "1.0.0",
+  "description": "A proxy for forwarding requests to Twitter",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Raphi Stein",
+  "license": "ISC",
+  "devDependencies": {
+    "express": "^4.13.4"
+  }
+}
