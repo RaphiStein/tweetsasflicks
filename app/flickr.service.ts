@@ -2,6 +2,8 @@ import {Injectable} from 'angular2/core';
 import {Http, HTTP_PROVIDERS} from 'angular2/http';
 import {Observable} from 'rxjs/Rx';
 import 'rxjs/Rx';
+// Data
+import {DataTypes} from './datatypes';
 
 @Injectable()
 export class FlickrService {
@@ -30,7 +32,7 @@ export class FlickrService {
      */
     getImage(imageUrl: string) {
         
-        console.log("Fetching from " + imageUrl);
+        //console.log("Fetching from " + imageUrl);
         
         return this.httpService.get(imageUrl)
             .map(res => {
@@ -40,12 +42,11 @@ export class FlickrService {
             .map(res => this.generateImageUrl(res));
     }
     
-    getImages(hashtags:string[]){
-        console.log("getImages()");
+    getImages(hashtags:DataTypes.HashtagObj[]){
         var arrayOfObservables = [];
         for (var hashtag in hashtags){
-            console.log(this.flickrAPI.fetchImagesByTag);
-            console.log(hashtags[hashtag]);
+            //console.log(this.flickrAPI.fetchImagesByTag);
+            //console.log(hashtags[hashtag]);
             var url:string = this.flickrAPI.fetchImagesByTag + "" + hashtags[hashtag].text;
             var query = this.getImage(url);
             arrayOfObservables.push(query);
@@ -54,8 +55,14 @@ export class FlickrService {
         return Observable.forkJoin(arrayOfObservables);
     }
     
-    generateImageUrl(imgData) {
+    generateImageUrl(imgData) :string {
+        if (imgData){
         return this.flickrAPI.fetchImageById.part1 + imgData.farm + this.flickrAPI.fetchImageById.part2 + imgData.server + this.flickrAPI.fetchImageById.part3 + imgData.id + this.flickrAPI.fetchImageById.part4 + imgData.secret + this.flickrAPI.fetchImageById.part5;
+        }
+        else {
+            console.log("No Image Data Returned");
+            return "404";
+        }
     }
 
     getImagesMock(hashtag: string) {

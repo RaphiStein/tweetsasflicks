@@ -1,0 +1,39 @@
+<div class="container">
+    <div class="col-xs-4">
+        <form (ngSubmit)="onSubmit()">
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="Search for hashtag..." [(ngModel)]="hashtagInput" />
+                <span class="input-group-btn">
+                <button class="btn btn-default" type="submit">Go!</button>
+            </span>
+            </div>
+        </form>
+    </div>
+    <div class="row">
+        <div id="feed" class="col-xs-12">
+            <div *ngFor="#feedItem of feedItems" class="row feed-row">
+                <div class="col-xs-4 feed-tweet">
+                    <div class="row tweet-header">
+                        <div class="col-xs-3 twitter-logo">
+                            <img src="./assets/twitter_logo_small.png" alt="">
+                        </div>
+                        <div class="col-xs-9 twitter-username">
+                            <h4>{{feedItem.twitterItem.user.name}}</h4>
+                        </div>
+                    </div>
+                    <div class="row tweet">
+                        {{feedItem.twitterItem.content}}
+                    </div>
+                </div>
+                <div class="col-xs-8 feed-flick">
+                    <div class="flicks">
+                        <div *ngFor="#imgUrl of feedItem.flickrItem.imgUrls" class="flick">
+                            <img src="{{imgUrl}}" alt="{{imgUrl}}">
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
