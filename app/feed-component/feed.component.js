@@ -67,7 +67,7 @@ System.register(['angular2/core', '../twitter.service', '../flickr.service', 'an
                 FeedComponent = __decorate([
                     core_1.Component({
                         selector: 'feed',
-                        templateUrl: 'tweetsasflicks/app/feed-component/feed.html',
+                        templateUrl: 'app/feed-component/feed.html',
                         providers: [twitter_service_1.TwitterService, flickr_service_1.FlickrService, http_1.Jsonp, http_1.JSONP_PROVIDERS, http_1.ConnectionBackend]
                     }), 
                     __metadata('design:paramtypes', [twitter_service_1.TwitterService, flickr_service_1.FlickrService])

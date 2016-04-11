@@ -8,7 +8,7 @@ import {DataTypes} from '../datatypes';
 
 @Component({
     selector: 'feed',
-    templateUrl: 'tweetsasflicks/app/feed-component/feed.html',
+    templateUrl: 'app/feed-component/feed.html',
     providers: [TwitterService, FlickrService, Jsonp, JSONP_PROVIDERS, ConnectionBackend]
 })
 export class FeedComponent {
